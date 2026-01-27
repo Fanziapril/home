@@ -1,224 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="keywords" content="Fanzi Wu, Wu Fanzi, fzwu, fanzi wu, 吴凡子, EE, CUHK, The Chinese University of Hong Kong">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords"
+    content="Fanzi Wu, Wu Fanzi, fzwu, fanzi wu, 吴凡子, EE, CUHK, The Chinese University of Hong Kong">
+  <link rel="shortcut icon" href="./jshao_files/s_ico.ico">
+  <title>WU Fanzi's Homepage</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --border-dark: #85422d;
+      --border-light: #e39463;
+      --board-bg: #f9f1d8;
+      --page-bg: #4a752c;
+      --text-main: #43241b;
+      --link-hover: #b15a3e;
+      --accent-bg: #efe1bf;
+      --dashed-border: #d4a76a;
+    }
 
-<link rel="stylesheet" href="jemdoc.css" type="text/css">
-<link rel="shortcut icon" href="./jshao_files/s_ico.ico">
-<title>WU Fanzi's Homepage</title>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Merriweather', Georgia, serif;
+      background-color: var(--page-bg);
+      background-image: url("https://www.transparenttextures.com/patterns/binding-light.png");
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 24px;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding: 48px;
+      }
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .bulletin-board {
+      border: 5px solid var(--border-dark);
+      position: relative;
+      padding: 2.5rem 2rem;
+      background-color: var(--board-bg);
+      box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2.5rem;
+    }
+
+    .pin {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 24px;
+      background-color: #cc3333;
+      border-radius: 50%;
+      border: 3px solid #991111;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+    }
+
+    .pin::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: white;
+      opacity: 0.5;
+      border-radius: 50%;
+      top: 3px;
+      left: 4px;
+    }
+
+    .pixel-border {
+      border: 4px solid var(--border-dark);
+      box-shadow:
+        inset -2px -2px 0px 0px #633021,
+        inset 2px 2px 0px 0px var(--border-light),
+        3px 3px 0px 0px rgba(0, 0, 0, 0.15);
+      background-color: var(--board-bg);
+    }
+
+    /* Header Section */
+    .header-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .header-content {
+        flex-direction: row;
+        text-align: left;
+        align-items: flex-start;
+        gap: 2rem;
+      }
+    }
+
+    .profile-image-container {
+      padding: 0px;
+      background: white;
+      border: 3px solid var(--border-dark);
+      margin-bottom: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 768px) {
+      .profile-image-container {
+        margin-bottom: 0;
+      }
+    }
+
+    .profile-image {
+      width: 200px;
+      height: auto;
+      display: block;
+    }
+
+    .header-info h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    @media (min-width: 768px) {
+      .header-info h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    .header-info p {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .header-info a {
+      color: var(--border-dark);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .header-info a:hover {
+      color: var(--link-hover);
+      text-decoration: underline;
+    }
+
+    .header-links {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+      .header-links {
+        justify-content: flex-start;
+      }
+    }
+
+    .header-links a {
+      display: inline-block;
+      padding: 6px 14px;
+      background-color: var(--accent-bg);
+      border: 2px solid var(--border-dark);
+      color: var(--border-dark);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+
+    .header-links a:hover {
+      transform: translateY(-2px);
+      background-color: #e5d4aa;
+    }
+
+    /* Section Titles */
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--border-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .section-title .icon-box {
+      padding: 8px;
+      background: #fdf8e9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .section-title span {
+      border-bottom: 2px dashed var(--dashed-border);
+      padding-bottom: 4px;
+    }
+
+    /* Content Lists */
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .content-list li {
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      background: transparent;
+      border-left: 4px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .content-list li:hover {
+      background: var(--accent-bg);
+      border-left-color: var(--border-dark);
+    }
+
+    .content-list li p {
+      margin: 0;
+    }
+
+    /* News Items */
+    .news-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .news-date {
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: var(--border-dark);
+      color: white;
+      padding: 4px 12px;
+      white-space: nowrap;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    .news-content {
+      font-size: 0.95rem;
+      border-bottom: 1px solid var(--dashed-border);
+      padding-bottom: 0.75rem;
+      flex: 1;
+    }
+
+    .news-item:last-child .news-content {
+      border-bottom: none;
+    }
+
+    /* Publication Items */
+    .publication-item {
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      background: transparent;
+      border-left: 4px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .publication-item:hover {
+      background: var(--accent-bg);
+      border-left-color: var(--border-dark);
+    }
+
+    .publication-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .publication-title a {
+      color: var(--border-dark);
+      text-decoration: none;
+      margin-left: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .publication-title a:hover {
+      text-decoration: underline;
+      color: var(--link-hover);
+    }
+
+    .publication-authors {
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .publication-authors b {
+      color: var(--border-dark);
+    }
+
+    .publication-venue {
+      font-style: italic;
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+
+    /* Teaching List */
+    .teaching-intro {
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .teaching-list li {
+      padding: 0.5rem 1rem;
+      border-left: 4px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .teaching-list li:hover {
+      background: var(--accent-bg);
+      border-left-color: var(--border-dark);
+    }
+
+    /* Info Boxes */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .info-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .info-box {
+      padding: 1rem;
+      background: #f2e6c9;
+      border: 2px dashed var(--dashed-border);
+    }
+
+    .info-box h4 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.7;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-box ul {
+      font-size: 0.9rem;
+      list-style: disc;
+      padding-left: 1.25rem;
+    }
+
+    .info-box ul li {
+      padding: 0.25rem 0;
+    }
+
+    .info-box ul li:hover {
+      background: transparent;
+      border-left: none;
+    }
+
+    /* Links Section */
+    .links-list a {
+      color: var(--border-dark);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .links-list a:hover {
+      color: var(--link-hover);
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    /* Visitor Counter */
+    .visitor-counter {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+  </style>
+  <script type="text/javascript">
+    // Toggle Display of BibTeX
+    function toggleBibtex(articleid) {
+      var bib = document.getElementById(articleid);
+      if (bib.style.display == "none") {
+        bib.style.display = "";
+      } else {
+        bib.style.display = "none";
+      }
+    }
+  </script>
 </head>
+
 <body>
+  <div class="container">
+
+    <!-- Profile Header Section -->
+    <header class="bulletin-board">
+      <div class="pin"></div>
+      <div class="header-content">
+        <div class="profile-image-container">
+          <img src="./images/fzwu_2026.jpg" alt="WU Fanzi" class="profile-image">
+        </div>
+        <div class="header-info">
+          <h1>WU Fanzi (吴凡子)</h1>
+          <p>Senior Applied Scientist @ Amazon AGI</p>
+          <p><strong>Location:</strong> Bellevue, WA, US</p>
+          <p style="margin-top: 0.5rem;">
+            <strong>Email:</strong> fzwu (at) link.cuhk.edu.hk
+          </p>
+          <div class="header-links">
+            <a href="./files/Resume_FanziWu.pdf">📄 CV</a>
+            <a href="https://scholar.google.com.hk/citations?user=hgDkhNcAAAAJ&hl=zh-CN">🎓 Google Scholar</a>
+            <a href="https://www.linkedin.com/in/fanzi-wu-56378077"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect width="4" height="12" x="2" y="9"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>Linkedin</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Biography Section -->
+    <section class="bulletin-board">
+      <div class="pin"></div>
+      <h2 class="section-title">
+        <span class="icon-box pixel-border">👤</span>
+        <span>About Me</span>
+      </h2>
+      <div style="font-size: 0.95rem; line-height: 1.8;">
+        <p style="margin-bottom: 1rem;">
+          I am currently a Senior Applied Scientist at Amazon AGI, working on multimodal generative models. I obtained
+          my Ph.D. in Electronic Engineering from The Chinese University of Hong Kong, supervised by <a
+            href="http://www.ee.cuhk.edu.hk/~knngan/">Prof. King Ngi Ngan </a> and <a
+            href="http://www.ee.cuhk.edu.hk/~tblu/monsite/phps/index.php">Prof. Thierry Blu</a> and co-supervised by
+          <a href="https://scholar.google.com/citations?user=34-TvuYAAAAJ&hl=zh-CN">Dr. Songnan Li</a>. I received my
+          B.Eng. in Electronic Engineering
+          from Tianjin University (TJU).
+        </p>
+        <p style="margin-bottom: 1rem;">
+          My recent work focuses on diffusion models, including image/video generation, and 3D object generation.
+        </p>
+        <p>
+          <!-- I obtained my Bachelor's degree in <a href="http://www.tju.edu.cn/seie/"
+            style="color: var(--border-dark); font-weight: 600;">School of Electronic Information Engineering</a> from
+          <a href="http://www.tju.edu.cn/" style="color: var(--border-dark); font-weight: 600;">Tianjin University
+            (TJU)</a>, China, in 2014. -->
+        </p>
+      </div>
+      <!-- <div class="info-grid">
+        <div class="info-box">
+          <h4>Research Focus</h4>
+          <ul>
+            <li>3D Face Reconstruction</li>
+            <li>Computer Vision</li>
+            <li>Deep Learning</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>Education</h4>
+          <p style="font-size: 0.9rem; font-style: italic;">Ph.D. @ CUHK (2014 - Present)<br>B.Eng. @ Tianjin University
+            (2010 - 2014)</p>
+        </div>
+      </div> -->
+    </section>
+
+    <!-- News Section -->
+    <section class="bulletin-board">
+      <div class="pin"></div>
+      <h2 class="section-title">
+        <span class="icon-box pixel-border">📢</span>
+        <span>News</span>
+      </h2>
+      <div class="news-item">
+        <div class="news-date">Dec 2025</div>
+        <div class="news-content">Amazon Nova 2 launched in AWS re:Invent.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">Mar 2025</div>
+        <div class="news-content">Amazon Bedrock Data Automation is generally available, which includes logo detection.
+        </div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">Dec 2024</div>
+        <div class="news-content">Amazon Nova Reel1.1 launched in AWS re:Invent.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">May 2023</div>
+        <div class="news-content">Amazon Rekognition launches eye gaze direction detection in Face APIs.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">May 2022</div>
+        <div class="news-content">Amazon Rekognition Face APIs V6 is released, we update the head pose model.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">Jun 2019</div>
+        <div class="news-content">I am going to attend CVPR 2019 (June 16-20, 2019) in Long Beach, USA.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">Sep 2016</div>
+        <div class="news-content">I am going to attend ICPR (Dec 4-8, 2016) in Cancun, Mexico.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">Jul 2016</div>
+        <div class="news-content">New homepage launched.</div>
+      </div>
+    </section>
 
 
 
-<div id="layout-content">
-<p>
+    <!-- Publications Section -->
+    <section class="bulletin-board">
+      <div class="pin"></div>
+      <h2 class="section-title">
+        <span class="icon-box pixel-border">📚</span>
+        <span>Publication</span>
+      </h2>
 
-<!-- <script type="text/javascript" async="" src="./jshao_files/ga.js"></script>-->
-<script type="text/javascript"> 
-// Toggle Display of BibTeX
-function toggleBibtex(articleid) {
-  var bib = document.getElementById(articleid);
-  // Toggle 
-    if(bib.style.display == "none") {
-      bib.style.display = "";
-    }
-    else {
-      bib.style.display = "none";
-    }
-}
-</script>
+      <div class="publication-item">
+        <div class="publication-title">
+          MVF-Net: Multi-View 3D Face Morphable Model Regression
+          <a href="https://arxiv.org/abs/1904.04473">[arXiv]</a>
+          <a href="https://github.com/Fanziapril/mvfnet">[code]</a>
+        </div>
+        <div class="publication-authors">
+          <b>Fanzi Wu</b>, Linchao Bao, Yajing Chen, Yonggen Ling, Yibing Song, Songnan Li, King Ngi Ngan, Wei Liu.
+        </div>
+        <div class="publication-venue">
+          IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2019
+        </div>
+      </div>
 
-<!--
-<script type="text/javascript">
+      <div class="publication-item">
+        <div class="publication-title">
+          Cascaded Regression using Landmark Displacement for 3D Face Reconstruction
+          <a href="https://arxiv.org/abs/1712.03491">[arXiv]</a>
+        </div>
+        <div class="publication-authors">
+          <b>Fanzi Wu</b>, Songnan Li, Tianhao Zhao, King Ngi Ngan.
+        </div>
+        <div class="publication-venue">
+          Pattern Recognition Letters (PRL).
+        </div>
+      </div>
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-40926388-1']);
-  _gaq.push(['_trackPageview']);
+      <div class="publication-item">
+        <div class="publication-title">
+          Model-based Face Reconstruction using SIFT Flow Registration and Spherical Harmonics
+          <a href="./files/0480.pdf">[PDF]</a>
+        </div>
+        <div class="publication-authors">
+          <b>Fanzi Wu</b>, Songnan Li, Tianhao Zhao, King Ngi Ngan.
+        </div>
+        <div class="publication-venue">
+          International Conference on Pattern Recognition (ICPR), 2016.
+        </div>
+      </div>
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      <div class="publication-item">
+        <div class="publication-title">
+          A Facial Expression Model with Generative Albedo Texture
+          <a href="./files/snli_APSIPA2016.pdf">[PDF]</a>
+          <a href="http://www.ee.cuhk.edu.hk/~snli/face_model.htm">[Project]</a>
+        </div>
+        <div class="publication-authors">
+          Songnan Li, <b>Fanzi Wu</b>, Tianhao Zhao, King Ngi Ngan.
+        </div>
+        <div class="publication-venue">
+          Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA ASC), 2016.
+        </div>
+      </div>
+    </section>
 
-</script>
--->
-</p>
+    <!-- Professional Activity Section -->
+    <section class="bulletin-board">
+      <div class="pin"></div>
+      <h2 class="section-title">
+        <span class="icon-box pixel-border">🔍</span>
+        <span>Professional Activity</span>
+      </h2>
+      <ul class="content-list">
+        <li>
+          <p><strong>Journal Reviewer:</strong> <em>IEEE Transactions on Multimedia</em></p>
+        </li>
+        <li>
+          <p><strong>Conference Reviewer:</strong> <em>International Conference on Visual Communications and Image
+              Processing (VCIP), 2017</em></p>
+        </li>
+        <li>
+          <p><strong>Conference Reviewer:</strong> <em>International Conference on Visual Communications and Image
+              Processing (VCIP), 2016</em></p>
+        </li>
+      </ul>
+    </section>
 
+    <!-- Teaching Section -->
+    <section class="bulletin-board">
+      <div class="pin"></div>
+      <h2 class="section-title">
+        <span class="icon-box pixel-border">🎓</span>
+        <span>Teaching</span>
+      </h2>
+      <p class="teaching-intro">Teaching assistant at CUHK for the following courses:</p>
+      <ul class="teaching-list">
+        <li>Modern Communication Systems (ENGG4503). Fall 2016-2017</li>
+        <li>Signal and Systems (ENGG2030). Spring 2015-2016</li>
+        <li>Modern Communication Systems (ENGG4503). Fall 2015-2016</li>
+        <li>Signal and Systems (ENGG2030). Spring 2014-2015</li>
+        <li>Signal and Systems (ENGG2030). Fall 2014-2015</li>
+      </ul>
+    </section>
 
+    <!-- Resources Section -->
+    <section class="bulletin-board">
+      <div class="pin"></div>
+      <h2 class="section-title">
+        <span class="icon-box pixel-border">🔗</span>
+        <span>Resources</span>
+      </h2>
+      <p style="font-weight: 600; margin-bottom: 0.75rem; font-style: italic;">Links</p>
+      <ul class="links-list content-list">
+        <li>
+          <p>Back to <a href="http://ivp.ee.cuhk.edu.hk/index.shtml">Image Video Processing Laboratory (IVP)</a></p>
+        </li>
+        <li>
+          <p>Go to <a href="http://www.ee.cuhk.edu.hk/">Department of Electronic Engineering</a></p>
+        </li>
+        <li>
+          <p>Go to <a href="http://www.cuhk.edu.hk/english/index.html">The Chinese University of Hong Kong</a></p>
+        </li>
+      </ul>
+      <!-- <div class="visitor-counter">
+        You are the <a href="http://www.reliablecounter.com" target="_blank"><img
+            src="http://www.reliablecounter.com/count.php?page=www.ee.cuhk.edu.hk/~fzwu/&digit=style/plain/3/&reloads=0"
+            alt="visitor counter" border="0"></a>th visitor.
+      </div> -->
+    </section>
 
-<table class="imgtable">
-<tbody>
-<tr>
-<td>
-  <img src="./images/fzwu.jpg" alt="alt text" width="180px" height="HEIGHTpx"> &nbsp;
-</td>
+    <!-- Footer -->
+    <footer>
+      <p>© 2026 WU Fanzi | Powered by Antigravity</p>
+    </footer>
 
-<td align="left">
-  <div id="toptitle"> 
-    <h1 align="left">
-    <span style="font:Helvetica; color:black;">WU Fanzi &nbsp;(吴凡子) 
-    </h1>
   </div>
-  
-  <p align="left">
-    Ph.D. student <A href = "./files/Resume_FanziWu.pdf"> [CV] </A><A href = "https://scholar.google.com.hk/citations?user=hgDkhNcAAAAJ&hl=zh-CN"> [Google Scholar] </A><br>
-    Supervised by <A href="http://www.ee.cuhk.edu.hk/~knngan/"> Prof. Ngan King Ngi</A> and <A href="http://www.ee.cuhk.edu.hk/~tblu/monsite/phps/index.php"> Prof. Thierry Blu</A><br>
-    Co-supervised by <A href="http://www.ee.cuhk.edu.hk/~snli/"> Dr. Li Songnan</A>
-    <BR> <BR>Email: wufanzi412 (at) gmail.com
-    <BR>Rm. 304, Ho Sin-Hang Engineering Building <BR>
-    The Chinese University of Hong Kong<br>
-  </p>
-</td>
-</tr>
-</tbody>
-</table>
+</body>
 
-
-<h2>
-News
-</h2>
-
-<ul>
-  <li>
-  <p>
-    I am going to attend CVPR 2019(June 16-20, 2019) in Long Beach, USA.</b>
-</li>
-<li>
-  <p>
-    Sep 30, 2016: I am going to attend ICPR (Dec 4-8, 2016) in Cancun, Mexico.
-</li>
-<li>
-  <p>
-    Jul 30, 2016: New homepage launched.
-</li>
-</ul>
-<h2>
-  Biography 
-</h2>
-<ul>
-<li>
-  <p>
-    I am a fifth-year Ph.D. student in <a href="http://www.ee.cuhk.edu.hk/">Department of Electronic Engineering</a> of <a href="http://www.cuhk.edu.hk/english/index.html">
-    The Chinese University of Hong Kong (CUHK)</a>.
-  </p>
-</li>
-<li>
-  <p>
-    My research interest focus on 3D face reconstruction from the color image.
-  </p>
-</li>
-
-<li>
-  <p>
-    I obtained my Bachelor's degree in <A href="http://www.tju.edu.cn/seie/">School of Electronic Information Engineering</A> from <A href="http://www.tju.edu.cn/"> 
-    Tianjin University (TJU) </A>, China, in 2014</a>. 
-  </p>
-</li>
-
-
-</ul>
-
-
-
-<h2>Publication</h2>
-<ul>
-  <li><p>
-    MVF-Net: Multi-View 3D Face Morphable Model Regression 
-    <a href = "https://arxiv.org/abs/1904.04473"> [arXiv] </a><a href = "https://github.com/Fanziapril/mvfnet"> [code] </a><br>
-    <b>Fanzi Wu</b>, Linchao Bao, Yajing Chen, Yonggen Ling, Yibing Song, Songnan Li, King Ngi Ngan, Wei Liu.
-    <em>IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2019</em>
-    <br><br>
-  </p></li>
-  
-  <li><p>
-    Cascaded Regression using Landmark Displacement for 3D Face Reconstruction
-    <a  href="https://arxiv.org/abs/1712.03491">[arXiv] </a><br>
-    <b>Fanzi Wu</b>, Songnan Li, Tianhao Zhao, King Ngi Ngan.
-    <em>Pattern Recognition Letters (PRL).</em>
-    <br><br>
-  </p></li>
-  
-  <li><p>
-    Model-based Face Reconstruction using SIFT Flow Registration and Spherical Harmonics 
-    <a href="./files/0480.pdf"> [PDF]</a><br>
-    <b>Fanzi Wu</b>, Songnan Li, Tianhao Zhao, King Ngi Ngan.
-    <em>International Conference on Pattern Recognition (ICPR), 2016. </em>
-    <br><br>
-  </p></li>
-  
-  <li><p>
-    A Facial Expression Model with Generative Albedo Texture
-    <a href="./files/snli_APSIPA2016.pdf"> [PDF] </a>
-    <a href = "http://www.ee.cuhk.edu.hk/~snli/face_model.htm"> [Project] </a><br>
-    Songnan Li, <b>Fanzi Wu</b>, Tianhao Zhao, King Ngi Ngan.
-    <em>Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA ASC), 2016. </em>
-    <br><br>
-  </p></li>
-</ul>
-  
-<h2>Professional Activity</h2>
-<ul>
-  <li><p>
-    Journal Reviewer: <em>IEEE Transactions on Multimedia</em><br>
-  </p></li>
-  
-  <li><p>
-    Conference Reviewer: <em>Internation Conference on Visual Communications and Image Processing (VCIP), 2017</em><br>
-  </p></li>
-  
-  <li><p>
-    Conference Reviewer: <em>Internation Conference on Visual Communications and Image Processing (VCIP), 2016</em><br>
-  </p></li>
-</ul>
-
-
-<h2>Teaching</h2>
-Teaching assistant at CUHK for the following courses:
-<ul>
-<li><p>Modern Communication Systems (ENGG4503). Fall 2016-2017<br>
-</p>
-</li>
-<li><p>Signal and Systems (ENGG2030).           Spring 2015-2016<br>
-</p>
-</li>
-<li><p>Modern Communication Systems (ENGG4503). Fall 2015-2016<br>
-</p>
-</li>
-<li><p>Signal and Systems (ENGG2030).           Spring 2014-2015<br>
-</p>
-</li>
-<li><p>Signal and Systems (ENGG2030).           Fall 2014-2015 <br>
-</p>
-</li>
-</ul>
-
-
-<h2>Resources</h2>
-
-<!-- <i>Datasets</i>
-<p>
-<ul>
-<li><p><a href="http://www.ee.cuhk.edu.hk/~yzhang/Mat_Seg.html">Material Segmentation Dataset:</a> Dataset for meterial segmentation in hyperspectral image.
-</li>
-</ul> -->
-
-
-<i>Links</i>
-<p>
-<ul>
-<li><p>Back to <A title="IVP" href="http://ivp.ee.cuhk.edu.hk/index.shtml">
-        Image Video Processing Laboratory (IVP)</A><br>
-          Go to <A title="Dept. of EE" href="http://www.ee.cuhk.edu.hk/">
-        Department of Electronic Engineering</A><br>
-          Go to <A title="CUHK" href="http://www.cuhk.edu.hk/english/index.html">
-        The Chinese University of Hong Kong</A>
-</p>
-</li>
-</ul>
-
-You are the <a href="http://www.reliablecounter.com" target="_blank"><img src="http://www.reliablecounter.com/count.php?page=www.ee.cuhk.edu.hk/~fzwu/&digit=style/plain/3/&reloads=0" alt="www.reliablecounter.com" title="www.reliablecounter.com" border="0"></a>th visitor.<br />
-                            
-
-</body></html>
+</html>
