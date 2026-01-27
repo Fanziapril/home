@@ -1,0 +1,232 @@
+import React from 'react';
+import { Mail, Github, Linkedin, FileText, ExternalLink, GraduationCap, BookOpen, User, MessageSquare, MapPin } from
+'lucide-react';
+
+const App = () => {
+// Stardew Valley Forum Inspired Palette
+const colors = {
+borderDark: '#85422d', // Official forum board border color
+borderLight: '#e39463', // Lighter inner bevel
+boardBg: '#f9f1d8', // Light parchment/board background
+pageBg: '#4a752c', // Classic grass green
+textMain: '#43241b', // Deep brown text
+linkHover: '#b15a3e'
+};
+
+// Border style mimicking the forum's announcement boards
+const pixelBorderStyle = {
+border: `4px solid ${colors.borderDark}`,
+boxShadow: `
+inset -2px -2px 0px 0px #633021,
+inset 2px 2px 0px 0px ${colors.borderLight},
+3px 3px 0px 0px rgba(0,0,0,0.15)
+`,
+backgroundColor: colors.boardBg,
+};
+
+const bulletinStyle = {
+border: `5px solid ${colors.borderDark}`,
+position: 'relative',
+padding: '2.5rem 2rem',
+backgroundColor: colors.boardBg,
+boxShadow: '6px 6px 0px 0px rgba(0,0,0,0.1)',
+marginBottom: '2.5rem',
+};
+
+const SectionTitle = ({ icon: Icon, title }) => (
+<h2 className="text-2xl font-bold flex items-center gap-3 mb-8" style={{ color: colors.borderDark }}>
+    <div className="p-2 bg-[#fdf8e9]" style={pixelBorderStyle}>
+        <Icon size={22} />
+    </div>
+    <span className="tracking-tight uppercase border-b-2 border-dashed border-[#d4a76a] pb-1">
+        {title}
+    </span>
+</h2>
+);
+
+return (
+<div className="min-h-screen p-4 md:p-12 font-serif" style={{ backgroundColor: colors.pageBg,
+    backgroundImage: 'url("https://www.transparenttextures.com/patterns/binding-light.png")' }}>
+    <div className="max-w-3xl mx-auto">
+
+        {/* Profile Header Section */}
+        <header className="mb-10 text-center relative" style={bulletinStyle}>
+            {/* Decorative Forum Pin */}
+            <div
+                className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-[#cc3333] rounded-full border-4 border-[#991111] shadow-md z-10 flex items-center justify-center">
+                <div className="w-2 h-2 bg-white rounded-full opacity-50 -mt-1 -ml-1"></div>
+            </div>
+
+            <div className="flex flex-col items-center">
+                {/* Profile Avatar with Forum-style frame */}
+                <div className="mb-6 mt-2 relative p-1 bg-white" style={{ border: `3px solid ${colors.borderDark}` }}>
+                    <div className="w-32 h-32 md:w-40 md:h-40 overflow-hidden bg-[#e9e0c6]">
+                        <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=April" alt="Profile"
+                            className="w-full h-full object-cover" />
+                    </div>
+                </div>
+
+                <h1 className="text-4xl md:text-5xl font-bold mb-3 tracking-tighter" style={{ color: colors.textMain }}>
+                    FANZI APRIL
+                </h1>
+                <p className="text-lg md:text-xl italic mb-6 opacity-90" style={{ color: colors.textMain }}>
+                    "Digital Researcher • Pixel Enthusiast"
+                </p>
+
+                <div className="flex flex-wrap justify-center gap-3 mb-8">
+                    <div
+                        className="flex items-center gap-2 text-sm font-bold bg-[#efe1bf] px-4 py-1.5 border-2 border-[#85422d]">
+                        <GraduationCap size={16} /> PhD Candidate
+                    </div>
+                    <div
+                        className="flex items-center gap-2 text-sm font-bold bg-[#efe1bf] px-4 py-1.5 border-2 border-[#85422d]">
+                        <MapPin size={16} /> Digital Arts
+                    </div>
+                </div>
+
+                {/* Social Links Grid */}
+                <div className="flex justify-center gap-4">
+                    {[
+                    { icon:
+                    <Mail size={20} />, label: "Email" },
+                    { icon:
+                    <Github size={20} />, label: "GitHub" },
+                    { icon:
+                    <Linkedin size={20} />, label: "LinkedIn" },
+                    { icon:
+                    <FileText size={20} />, label: "CV" }
+                    ].map((item, idx) => (
+                    <a key={idx} href="#"
+                        className="w-12 h-12 flex items-center justify-center transition-all hover:-translate-y-1 active:translate-y-0"
+                        style={{ ...pixelBorderStyle, backgroundColor: '#efe1bf' , color: colors.borderDark }}
+                        title={item.label}>
+                        {item.icon}
+                    </a>
+                    ))}
+                </div>
+            </div>
+        </header>
+
+        {/* About Section */}
+        <section style={bulletinStyle}>
+            <SectionTitle icon={User} title="About Me" />
+            <div className="space-y-5 text-lg leading-relaxed" style={{ color: colors.textMain }}>
+                <p>
+                    Hello! I'm Fanzi April. I specialize in bridging the gap between retro game aesthetics and modern
+                    web technology.
+                    My work explores how the nostalgic feel of 8-bit art can improve user engagement in professional
+                    environments.
+                </p>
+                <p>
+                    Like the steady rhythm of a farm in Pelican Town, I believe in the beauty of consistent
+                    craftsmanship and
+                    well-tended codebases.
+                </p>
+            </div>
+
+            <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 bg-[#f2e6c9] border-2 border-[#d4a76a] border-dashed">
+                    <h4 className="font-bold mb-2 uppercase text-xs tracking-widest opacity-70">Focus Areas</h4>
+                    <ul className="text-sm space-y-1 list-disc list-inside">
+                        <li>Human-Computer Interaction</li>
+                        <li>Creative Web Design</li>
+                        <li>Game UI Frameworks</li>
+                    </ul>
+                </div>
+                <div className="p-4 bg-[#f2e6c9] border-2 border-[#d4a76a] border-dashed">
+                    <h4 className="font-bold mb-2 uppercase text-xs tracking-widest opacity-70">Current Quest</h4>
+                    <p className="text-sm italic">Completing the "PhD Dissertation" bundle at the local University
+                        Library.</p>
+                </div>
+            </div>
+        </section>
+
+        {/* News Section */}
+        <section style={bulletinStyle}>
+            <SectionTitle icon={MessageSquare} title="Recent Updates" />
+            <div className="space-y-6">
+                {[
+                { date: 'Winter 24', content: 'Keynote speaker at the Pixel-Art Web Tech Summit.' },
+                { date: 'Fall 12', content: 'Successfully integrated the "Bulletin Board" UI system into my personal
+                space.' },
+                { date: 'Summer 05', content: 'Published a new study on nostalgic UI elements in the "Journal of Digital
+                Joy".' }
+                ].map((item, i) => (
+                <div key={i} className="flex gap-4 items-start group">
+                    <div
+                        className="font-bold text-xs bg-[#85422d] text-white px-3 py-1 whitespace-nowrap shadow-sm min-w-[80px] text-center">
+                        {item.date}
+                    </div>
+                    <div className="text-sm border-b border-[#d4a76a] pb-3 w-full group-last:border-none">
+                        {item.content}
+                    </div>
+                </div>
+                ))}
+            </div>
+        </section>
+
+        {/* Publications Section */}
+        <section style={bulletinStyle}>
+            <SectionTitle icon={BookOpen} title="Publications" />
+            <div className="space-y-2">
+                {[
+                "The Aesthetics of the 8-bit Web (2024)",
+                "Stardew UI: A Case Study in Emotional Design (2023)",
+                "Digital Farming: Metaphors in User Interaction (2022)"
+                ].map((pub, i) => (
+                <div key={i}
+                    className="group p-4 bg-transparent hover:bg-[#efe1bf] transition-all border-l-4 border-transparent hover:border-[#85422d] flex justify-between items-center cursor-pointer">
+                    <span className="font-medium">{pub}</span>
+                    <ExternalLink size={16}
+                        className="text-[#85422d] opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+                ))}
+            </div>
+        </section>
+
+        {/* Contact Section */}
+        <section style={bulletinStyle}>
+            <SectionTitle icon={Mail} title="Contact" />
+            <div className="space-y-6">
+                <p className="text-sm opacity-80 italic">Feel free to reach out via the forum mail or use the form
+                    below.</p>
+                <form className="space-y-4" onSubmit={(e)=> e.preventDefault()}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                            <label className="block text-xs font-bold uppercase opacity-70">Your Name</label>
+                            <input type="text"
+                                className="w-full p-3 border-2 border-[#85422d] bg-[#fdf8e9] outline-none focus:bg-white" />
+                        </div>
+                        <div className="space-y-1">
+                            <label className="block text-xs font-bold uppercase opacity-70">Email Address</label>
+                            <input type="email"
+                                className="w-full p-3 border-2 border-[#85422d] bg-[#fdf8e9] outline-none focus:bg-white" />
+                        </div>
+                    </div>
+                    <div className="space-y-1">
+                        <label className="block text-xs font-bold uppercase opacity-70">Message</label>
+                        <textarea rows="4"
+                            className="w-full p-3 border-2 border-[#85422d] bg-[#fdf8e9] outline-none focus:bg-white"></textarea>
+                    </div>
+                    <div className="flex justify-end">
+                        <button
+                            className="px-10 py-3 font-bold text-white uppercase transition-all hover:brightness-110 active:scale-95 shadow-md"
+                            style={{ ...pixelBorderStyle, backgroundColor: '#6DAA2C' , border: 'none' }}>
+                            Send Letter
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="mt-8 mb-16 text-center text-xs font-bold uppercase tracking-widest" style={{ color: 'white' ,
+            textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>
+            <p>© 2024 Fanzi April • Made in Pelican Town</p>
+        </footer>
+    </div>
+</div>
+);
+};
+
+export default App;
